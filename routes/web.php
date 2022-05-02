@@ -11,6 +11,14 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('frontend.home');
 });
+  
+
+
+Route::get('/login', function () {
+    return redirect()->route('member::login');
+});
+
