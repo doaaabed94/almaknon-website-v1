@@ -1,0 +1,13 @@
+{
+    "name": "Maknon",
+    "alias": "maknon",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Maknon\\Providers\\MaknonServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

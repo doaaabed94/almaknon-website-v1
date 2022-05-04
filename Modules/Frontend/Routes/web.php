@@ -10,11 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::group([
-    'middleware'    => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
-], function() {
-  
 //   Route::get('/clear-cache', 'HomeController@clearCache')->name('cache.clear');
 
   Route::get('/', 'FrontendController@index')->name('frontend.home');
@@ -50,4 +45,3 @@ Route::group([
         Route::get('/{type}/{slug}',        'BlogController@single')->name('single');
     });
 
-});

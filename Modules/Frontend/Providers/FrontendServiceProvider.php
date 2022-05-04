@@ -147,12 +147,21 @@ class FrontendServiceProvider extends ServiceProvider
        //      return Country::translatedIn(app()->getLocale())->with('translations')->get();
        //  });
 
-        $markas =   Marka::translatedIn(app()->getLocale())->with('translations')->get();
-       $conditions =   Condition::translatedIn(app()->getLocale())->with('translations')->get();
-       $fuels =   Fuel::translatedIn(app()->getLocale())->with('translations')->get();
-       $offers =   Offer::translatedIn(app()->getLocale())->with('translations')->get();
-       $countries =   Country::translatedIn(app()->getLocale())->with('translations')->get();
-       $last_cars =   Car::translatedIn(app()->getLocale())->with(['translations','Marka','Condition','Fuel','Offer'])->paginate(8);
+       //  $markas =   Marka::translatedIn(app()->getLocale())->with('translations')->get();
+       // $conditions =   Condition::translatedIn(app()->getLocale())->with('translations')->get();
+       // $fuels =   Fuel::translatedIn(app()->getLocale())->with('translations')->get();
+       // $offers =   Offer::translatedIn(app()->getLocale())->with('translations')->get();
+       // $countries =   Country::translatedIn(app()->getLocale())->with('translations')->get();
+       // $last_cars =   Car::translatedIn(app()->getLocale())->with(['translations','Marka','Condition','Fuel','Offer'])->paginate(8);
+
+
+
+        $markas =   [];
+       $conditions =  [];;
+       $fuels =    [];
+       $offers =  [];
+       $countries =  [];
+       $last_cars =  [];
 
         View::share('markas', $markas);
         View::share('conditions', $conditions);
