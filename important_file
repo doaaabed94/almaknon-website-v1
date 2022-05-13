@@ -42,4 +42,11 @@ composer dump-autoload<br>
 composer require mcamara/laravel-localization
 <br>
 php artisan vendor:publish --provider="Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider"
+<br>
+-------------------------------------------------
+<br>
+composer require         "/glide": "^2.2",
+<br>
 
+
+-------------------------------------------------
