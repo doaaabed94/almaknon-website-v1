@@ -11,10 +11,8 @@
 |
  */
 
-Route::get('/home', 'AdminController@index')->name('index');
 
 Route::prefix('dashboard')->name('member::')->group(function () {
-
     Route::get('/', 'AdminController@index')->name('index');
     Route::get('Member/{module}', 'AdminController@index')->name('customIndex');
 

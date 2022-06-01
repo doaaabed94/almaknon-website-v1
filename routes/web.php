@@ -11,15 +11,17 @@
 |
  */
 Route::get('/', function () {
-    return redirect()->route('index');
+    return redirect()->route('frontend.home');
 });
   
 Route::get('/index', function () {
-    return redirect()->route('index');
+    return redirect()->route('frontend.home');
+
 });
 
 Route::get('/home', function () {
-    return redirect()->route('index');
+    return redirect()->route('frontend.home');
+
 });
 
 Route::get('/clear-cache', function() {
