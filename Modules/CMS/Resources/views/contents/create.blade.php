@@ -39,10 +39,19 @@
                                     'label' => __('cms::inputs.categories.label'),
                                     'nullable' =>__('cms::inputs.categories.placeholder'),
                                     'nullable_v' => null,
-                                    'container_class' => 'col-lg-8',
                                     'label_size' => 'col-lg-2',
                                     'input_size' => 'col-lg-10',
                                     'options' => $categories,
+                                     'options' => [
+                                    [
+                                        'value' => 'ACTIVE',
+                                        'text' => __('member::strings.active'),
+                                    ],
+                                    [
+                                        'value' => 'DISABLED',
+                                        'text' => __('member::strings.disabled'),
+                                    ],
+                                ],
                                     'option_attr' => function($K, $V){
                                         return 'data-dial="'. $V->id .'"';
                                     },
@@ -104,7 +113,7 @@
                                 ],
                             ]
                             )
-                        @include(
+                  {{--       @include(
                             'member::common-components.inputs.text',
                             [
                                 'options' => [
@@ -118,7 +127,7 @@
                                     'input_size' => 'col-lg-10',
                                 ],
                             ]
-                            )
+                            ) --}}
 
                             @include('member::common-components.inputs.dropzone', [
                                 'options' => [
@@ -322,9 +331,8 @@
                                 'label' => __('member::inputs.status.label'),
                                 'nullable' => null,
                                 'nullable_v' => null,
-                                'container_class' => 'col-lg-8',
-                                'label_size' => 'col-lg-2',
-                                'input_size' => 'col-lg-10',
+                                 'label_size' => 'col-lg-2',
+                                    'input_size' => 'col-lg-10',
                                 'options' => [
                                     [
                                         'value' => 'ACTIVE',

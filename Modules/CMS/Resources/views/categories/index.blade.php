@@ -10,13 +10,13 @@
         @slot('title')
         <a href="{{ route('cms::categories.index') }}" > {!! __('cms::strings.categories_list') !!} </a>
         @endslot
-        @slot('title_li')
+    {{--     @slot('title_li')
             @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_CATEGORY'))
                 <a href="{!! route('cms::categories.create') !!}" class="btn btn-warning">
                     {!! __('member::strings.add_new') !!}
                 </a>
             @endif
-        @endslot
+        @endslot --}}
     @endcomponent
 
     <div class="row">

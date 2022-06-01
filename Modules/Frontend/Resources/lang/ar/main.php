@@ -17,6 +17,8 @@ return [
     'name_logo_css'                   => '<span>المكنون</span>',
     'name_website'                    => 'المكنون',
     'Language'                        => 'اللغات',
+    'blogs'                           => 'المدونة',
+    'Our Admin' =>'كاتب المكنون',
 
     ////////////// ------------ index page -----------------////////////////
 
@@ -33,8 +35,8 @@ return [
     'all_manufacturers'               => 'جميع الشركات',
     'GIVING OUR CUSTOMERS BEST DEALS' => 'احصل علر افضل عروض',
     'BEST OFFERS FROM MAKNON'         => 'أفضل عروض من المكنون',
-   'subscribe_desc' =>'',
+    'subscribe_desc'                  => '',
 
-    'main_title_subscribe' =>'آخر الاخبار و العروض',
-    'sub_title_subscribe' =>'سجل معنا في نشرة آخبار الاخبار',
+    'main_title_subscribe'            => 'آخر الاخبار و العروض',
+    'sub_title_subscribe'             => 'سجل معنا في نشرة آخبار الاخبار',
 ];

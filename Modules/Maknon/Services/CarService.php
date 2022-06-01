@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Modules\Maknon\Entities\Car;
 use Modules\Member\Entities\Attachment;
 use Str;
+use Modules\Maknon\Entities\Evaluation;
+use Modules\Maknon\Entities\Favourite;
+
 
 class CarService extends BaseService
 {
@@ -64,6 +67,45 @@ class CarService extends BaseService
     public function getModel($id, ...$relations)
     {
         $this->data['model'] = Car::query();
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_CAR')) {
+            $this->data['model']->withTrashed();
+        }
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_CAR')) {
+            $this->data['model']->withDisabled();
+        }
+
+        if ($relations) {
+            $this->data['model']->with($relations);
+        }
+
+        return $this->data['model']->find($id);
+    }
+
+        public function getFavouriteModel($id, ...$relations)
+    {
+        $this->data['model'] = Favourite::query();
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_CAR')) {
+            $this->data['model']->withTrashed();
+        }
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_CAR')) {
+            $this->data['model']->withDisabled();
+        }
+
+        if ($relations) {
+            $this->data['model']->with($relations);
+        }
+
+        return $this->data['model']->find($id);
+    }
+
+
+        public function getEvaluationModel($id, ...$relations)
+    {
+        $this->data['model'] = Evaluation::query();
 
         if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_CAR')) {
             $this->data['model']->withTrashed();
@@ -332,4 +374,88 @@ class CarService extends BaseService
             'message_description' => __('member::strings.perma_delete_success.description'),
         ]);
     }
+
+
+      public function getEvaluationbyCar($id, ...$relations)
+    {
+        $this->data['Evaluation'] = Evaluation::query();
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_CAR')) {
+            $this->data['Evaluation']->withTrashed();
+        }
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_CAR')) {
+            $this->data['Evaluation']->withDisabled();
+        }
+
+        if ($relations) {
+            $this->data['Evaluation']->with($relations);
+        }
+
+        return $this->data['Evaluation']->get();
+    }
+
+
+      public function getFavouritebyCar($id, ...$relations)
+    {
+        $this->data['Favourite'] = Favourite::query();
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_CAR')) {
+            $this->data['Favourite']->withTrashed();
+        }
+
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_CAR')) {
+            $this->data['Favourite']->withDisabled();
+        }
+
+        if ($relations) {
+            $this->data['Favourite']->with($relations);
+        }
+
+        return $this->data['Favourite']->get();
+    }
+
+    public function statusEvaluation($id)
+    {
+        $this->data['currentUser'] = request()->user();
+        if (!$this->data['model'] = $this->getEvaluationModel($id)) {
+            return $this->response(404);
+        }
+
+        if ($this->data['model']->isDisabled()) {
+            $this->data['model']->updated_by = $this->data['currentUser']->id;
+            $this->data['model']->status     = "ACTIVE";
+            $this->data['model']->save();
+            $this->data['model']->enable();
+        } else if ($this->data['model']->isEnabled()) {
+            $this->data['model']->updated_by = $this->data['currentUser']->id;
+            $this->data['model']->status     = "DISABLED";
+            $this->data['model']->save();
+            $this->data['model']->disable();
+        }
+        return $this->response(200);
+    }
+
+    public function statusFavourite($id)
+    {
+        $this->data['currentUser'] = request()->user();
+        if (!$this->data['model'] = $this->getFavouriteModel($id)) {
+            return $this->response(404);
+        }
+
+        if ($this->data['model']->isDisabled()) {
+            $this->data['model']->updated_by = $this->data['currentUser']->id;
+            $this->data['model']->status     = "ACTIVE";
+            $this->data['model']->save();
+            $this->data['model']->enable();
+        } else if ($this->data['model']->isEnabled()) {
+            $this->data['model']->updated_by = $this->data['currentUser']->id;
+            $this->data['model']->status     = "DISABLED";
+            $this->data['model']->save();
+            $this->data['model']->disable();
+        }
+        return $this->response(200);
+    }
+
+
 }

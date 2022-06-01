@@ -1,18 +1,18 @@
 @extends('member::layouts.master')
 
 @section('title')
-{!! __('cms::strings.contents_list') !!}
+{!! __('maknon::main.offers_list') !!}
 @endsection
 
 @section('content')
 
     @component('member::common-components.breadcrumb')
         @slot('title')
-        <a href="{{ route('cms::contents.index') }}" > {!! __('cms::strings.contents_list') !!} </a>
+        <a href="{{ route('offers.index') }}" > {!! __('maknon::main.offers_list') !!} </a>
         @endslot
         @slot('title_li')
-            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_CONENTS'))
-                <a href="{!! route('cms::contents.create') !!}" class="btn btn-warning">
+            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_OFFERS'))
+                <a href="{!! route('offers.create') !!}" class="btn btn-warning">
                     {!! __('member::strings.add_new') !!}
                 </a>
             @endif
@@ -24,7 +24,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title">{!! __('cms::strings.contents_list') !!}</h4>
+                    <h4 class="card-title">{!! __('maknon::main.offers_list') !!}</h4>
 
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -32,8 +32,6 @@
                             <tr>
                                 <th>{{ __('member::strings.datatable.id') }}</th>
                                 <th>{{ __('member::strings.datatable.name') }}</th>
-                                <th>{{ __('member::strings.datatable.slug') }}</th>
-                                <th>{{ __('member::strings.datatable.type') }}</th>
                                 <th>{{ __('member::strings.datatable.status') }}</th>
                                 <th>{{ __('member::strings.datatable.actions') }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
@@ -44,27 +42,25 @@
                                 <tr  @if($data->trashed()) style="background: #ffdbda;" @endif @if($data->isDisabled()) style="background: #ffebe8;" @endif>
                                     <td>{{$data->id}}</td>
                                     <td>{{ $data->translateOrFirst()->name }}</td>
-                                    <td>{{ $data->slug }}</td>
-                                    <td>@if($data->Category) {{ $data->Category->name }} @endif</td>
                                     <td><span class="btn btn-bold btn-sm btn-font-sm btn-{{ $data->status  == 'DISABLED' ? 'danger' : 'info' }}">
                                       {{ $data->status ? $data->status : '------' }}</span></td>
                                     <td>
                                       @include('member::common-components.action_datatable', [
                                         'id'                        => $data->id,
-                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_CONENTS'),
-                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_CONENTS'),
-                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_CONENTS')) && $data->trashed(),
-                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_CONENTS')) && !$data->trashed(),
-                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_CONENTS'),
-                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_CONENTS')) && $data->isEnabled(),
-                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_CONENTS')) && $data->isDisabled(),
+                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_OFFERS'),
+                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_OFFERS'),
+                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_OFFERS')) && $data->trashed(),
+                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_OFFERS')) && !$data->trashed(),
+                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_OFFERS'),
+                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_OFFERS')) && $data->isEnabled(),
+                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_OFFERS')) && $data->isDisabled(),
                                         
-                                        'read_url'                  => route('cms::contents.read', ['model' => $data->id]) ,
-                                        'delete_url'                => route('cms::contents.postDelete', ['model' => $data->id]) ,
-                                        'restore_url'               => route('cms::contents.postRestore', ['model' => $data->id]) ,
-                                        'update_url'                => route('cms::contents.update', ['model' => $data->id]),
-                                        'permdelete_url'            => route('cms::contents.postPermaDelete', ['model' => $data->id]),
-                                        'status_url'                => route('cms::contents.postStatus', ['model' => $data->id]),
+                                        'read_url'                  => route('offers.read', ['model' => $data->id]) ,
+                                        'delete_url'                => route('offers.postDelete', ['model' => $data->id]) ,
+                                        'restore_url'               => route('offers.postRestore', ['model' => $data->id]) ,
+                                        'update_url'                => route('offers.update', ['model' => $data->id]),
+                                        'permdelete_url'            => route('offers.postPermaDelete', ['model' => $data->id]),
+                                        'status_url'                => route('offers.postStatus', ['model' => $data->id]),
                                         ])
                                     </td>
                                 </tr>

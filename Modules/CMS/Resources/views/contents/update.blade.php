@@ -24,6 +24,7 @@
                         <div id="show_inline_general_error"></div>
                         <input type="hidden" name="model" value="{{ $data->id }}">
 
+                        @if(isset($data->category) && $data->category->code !== 'PAGES')
                            @include(
                             'member::common-components.inputs.select',
                             [
@@ -35,8 +36,7 @@
                                     'label' => __('cms::inputs.categories.label'),
                                     'nullable' =>__('cms::inputs.categories.placeholder'),
                                     'nullable_v' => null,
-                                    'container_class' => 'col-lg-8',
-                                    'label_size' => 'col-lg-2',
+                                     'label_size' => 'col-lg-2',
                                     'input_size' => 'col-lg-10',
                                     'options' => $categories,
                                     'option_attr' => function($K, $V){
@@ -70,6 +70,7 @@
                                 ],
                             ]
                             )
+                       
                         @include(
                             'member::common-components.inputs.text',
                             [
@@ -115,7 +116,7 @@
                                 ],
                             ]
                             )
-
+                        @endif
                               @include('member::common-components.inputs.dropzone', [
                                 'options' => [
                                     'id' => 'main_contant_img',

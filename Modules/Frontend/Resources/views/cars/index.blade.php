@@ -1,22 +1,22 @@
    @extends('frontend::layouts.master')
    @section('content')
  
-    <section class="b-pageHeader">
-        <div class="container">
-            <h1 class="wow zoomInLeft" data-wow-delay="0.5s">Auto Listings</h1>
-            <div class="b-pageHeader__search wow zoomInRight" data-wow-delay="0.5s">
-                <h3>Your search returned 28 results</h3>
-            </div>
-        </div>
-    </section>
-    <!--b-pageHeader-->
+ @component('frontend::inc.banner-title')
+         @slot('text1')
+            {!! __('frontend::main.blogs') !!}
+        @endslot
 
-    <div class="b-breadCumbs s-shadow">
-        <div class="container wow zoomInUp" data-wow-delay="0.5s">
-            <a href="home.html" class="b-breadCumbs__page">Home</a><span class="fa fa-angle-right"></span><a href="listTable.html" class="b-breadCumbs__page m-active">Search Results</a>
-        </div>
-    </div>
-    <!--b-breadCumbs-->
+         @slot('text2')
+            {!! __('frontend::main.blogs') !!}
+        @endslot
+    @endcomponent
+<!--b-pageHeader-->
+@component('frontend::inc.breadcrumbs')
+         @slot('li_1')
+            {!! __('frontend::main.blogs') !!}
+        @endslot
+    @endcomponent
+    
 
     <div class="b-infoBar">
         <div class="container">

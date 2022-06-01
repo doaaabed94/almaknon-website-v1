@@ -295,14 +295,14 @@
                             </a>
                         </li>
                         @endif
-
+{{-- 
                        @if ( $IS_ROOT OR auth()->user()->can('CREATE_CATEGORY') )
                         <li>
                             <a href="{{route('cms::categories.create')}}">
                                 {!! __('member::strings.add_new') !!}
                             </a>
                         </li>
-                        @endif
+                        @endif --}}
                     </ul>
                 </li>
                 @endif

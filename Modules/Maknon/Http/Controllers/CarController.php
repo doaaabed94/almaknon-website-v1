@@ -11,6 +11,7 @@ use Modules\Maknon\Entities\Color;
 use Modules\Maknon\Entities\Condition;
 use Modules\Maknon\Entities\Currency;
 use Modules\Maknon\Entities\Fuel;
+
 use Modules\Maknon\Entities\Marka;
 use Modules\Maknon\Entities\Offer;
 use Modules\Maknon\Services\CarService;
@@ -198,4 +199,48 @@ class CarController extends Controller
 
         return view('maknon::cars.read', $this->data);
     }
+
+
+     public function favourite(Request $request)
+    {
+        if (!$this->data['all_data'] = $this->service->getFavouritebyCar($request->model, 'member')) {
+            return $this->service->response(404);
+        }
+
+        return view('maknon::cars.favourite', $this->data);
+    }
+
+
+     public function evaluation(Request $request)
+    {
+        if (!$this->data['all_data'] = $this->service->getEvaluationbyCar($request->model, 'member')) {
+            return $this->service->response(404);
+        }
+
+        return view('maknon::cars.evaluation', $this->data);
+    }
+
+       public function postStatusEvaluation(Request $request)
+    {
+        try {
+            return DB::transaction(function () use ($request) {
+                return $this->service->statusEvaluation($request->model);
+            });
+        } catch (Exception $e) {
+            return $this->service->response(500, [], $e);
+        }
+    }
+
+       public function postStatusFavourite(Request $request)
+    {
+        try {
+            return DB::transaction(function () use ($request) {
+                return $this->service->statusFavourite($request->model);
+            });
+        } catch (Exception $e) {
+            return $this->service->response(500, [], $e);
+        }
+    }
+
+
 }

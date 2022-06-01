@@ -13,6 +13,9 @@ return [
     'colors_list'         => 'List of colors',
     'currency_list'       => 'List of currencies',
     'configs_list'       => 'List of configs',
+    'evaluation_list' => 'List of Evaluation',
+    'favourite_list' => 'List of Favourite',
+
 
     'car'                 => 'car',
     'blog'                => 'blog',

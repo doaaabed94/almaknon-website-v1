@@ -49,3 +49,29 @@ Route::group(['prefix' => 'users', 'as' => 'VisitorController@'], function () {
 });
 
 Route::post('/newsletter/postCreate', 'FrontendController@newsletter')->name('newsletter@postCreate');
+
+
+Route::group(['prefix' => 'member', 'as' => 'MemberController@'], function () {
+
+Route::get('login', 'MemberController@login')->name('login');
+Route::post('login', 'MemberController@postLogin')->name('postLogin');
+Route::get('register', 'MemberController@register')->name('register');
+Route::post('register', 'MemberController@postRegister')->name('postRegister');
+Route::get('change-password/{token}', 'MemberController@changePassword')->name('changePassword');
+Route::post('change-password', 'MemberController@postChangePassword')->name('postChangePassword');
+Route::get('logout', 'MemberController@postLogout')->name('postLogout');
+Route::post('logout', 'MemberController@postLogout')->name('postLogout');
+
+Route::get('profile', 'MemberController@profile')->name('profile');
+Route::post('profile', 'MemberController@postProfile')->name('postProfile');
+
+
+Route::post('{model}/favorite/add', 'MemberController@addFavorite')->name('addFavorite');
+Route::post('{model}/favorite/remove', 'MemberController@removeFavorite')->name('removeFavorite');
+
+Route::post('{model}/evaluation/add', 'MemberController@addEvaluation')->name('addEvaluation');
+Route::post('{model}/evaluation/remove', 'MemberController@removeEvaluation')->name('removeEvaluation');
+
+});
+
+

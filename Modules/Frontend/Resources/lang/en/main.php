@@ -16,6 +16,8 @@ return [
     'name_website'                    => 'AL Maknon',
     'Language'                        => 'Language',
     'search'                          => 'search',
+    'blogs'                           => 'blogs',
+    'Our Admin' =>'Our Admin',
 
     'Find_your_Car'                   => 'Find your Car',
     'last_blogs'                      => 'popular blogs',

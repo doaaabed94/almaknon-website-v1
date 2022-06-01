@@ -23,15 +23,15 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-
                     <h4 class="card-title">{!! __('maknon::main.cars_list') !!}</h4>
-
                     <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap"
                         style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th>{{ __('member::strings.datatable.id') }}</th>
                                 <th>{{ __('member::strings.datatable.name') }}</th>
+                                <th>{{ __('maknon::main.favourite_list') }}</th>
+                                <th>{{ __('maknon::main.evaluation_list') }}</th>
                                 <th>{{ __('member::strings.datatable.status') }}</th>
                                 <th>{{ __('member::strings.datatable.actions') }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
@@ -42,6 +42,10 @@
                                 <tr  @if($data->trashed()) style="background: #ffdbda;" @endif @if($data->isDisabled()) style="background: #ffebe8;" @endif>
                                     <td>{{$data->id}}</td>
                                     <td>{{ $data->translateOrFirst()->name }}</td>
+
+                                    <td> <a href="{{ route('cars.favourite' , ['model' => $data->id])}}"> {!! __('member::strings.read') !!}</a></td>
+                                    <td> <a href="{{ route('cars.evaluation' , ['model' => $data->id])}}">  {!! __('member::strings.read') !!}</a></td>
+
                                     <td><span class="btn btn-bold btn-sm btn-font-sm btn-{{ $data->status  == 'DISABLED' ? 'danger' : 'info' }}">
                                       {{ $data->status ? $data->status : '------' }}</span></td>
                                     <td>

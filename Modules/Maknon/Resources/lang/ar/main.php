@@ -13,6 +13,8 @@ return [
     'colors_list'         => 'قائمة الألوان',
     'currency_list'       => 'قائمة العملات ',
     'configs_list'       => 'إعدادات الموقع',
+    'evaluation_list' => 'قائمة التقييمات',
+    'favourite_list' => 'قائمة المفضلة',
 
 
     'car'                 => 'السيارة',

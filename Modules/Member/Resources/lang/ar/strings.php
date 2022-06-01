@@ -190,6 +190,10 @@ return [
         'name'    => 'الأسم',
         'value'    => 'القيمة',
         'code'    => 'code',
+        'car'    => 'السيارة',
+        'member'    => 'العضو',
+        'evaluation'    => 'التقييم',
+
     ],
 
     'content_manager_section'                           => 'ادارة المحتوى',
