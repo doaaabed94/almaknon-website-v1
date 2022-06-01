@@ -1,13 +1,13 @@
 @extends('member::layouts.master')
 
 @section('title')
-    {!! __('maknon::main.markas_list') !!} - {!! __('member::strings.add_new') !!}
+    {!! __('cms::strings.markas_list') !!} - {!! __('member::strings.add_new') !!}
 @endsection
 
 @section('content')
     @component('member::common-components.breadcrumb')
         @slot('title')
-        <a href="{{ route('markas.index') }}" > {!! __('maknon::main.markas_list') !!} </a>
+        <a href="{{ route('markas.index') }}" > {!! __('cms::strings.markas_list') !!} </a>
         @endslot
         @slot('li_1')
             {!! __('member::strings.add_new') !!}
@@ -48,14 +48,14 @@
                                                         'name' => 'name[' . $_LOCALE_BASE_CODE . ']',
                                                         'view' => 'INLINE',
                                                         'label' =>
-                                                            __('maknon::inputs.title.label') .
+                                                            __('member::inputs.title.label') .
                                                             ' <span class="text-danger"> [' .
                                                             $_LOCALE_BASE_CODE .
                                                             '] <span>',
                                                         'placeholder' => __(
-                                                            'maknon::inputs.title.placeholder'
+                                                            'member::inputs.title.placeholder'
                                                         ),
-                                                        'help' => __('maknon::inputs.title.help'),
+                                                        'help' => __('member::inputs.title.help'),
                                                         'value' => old(
                                                             'title[' . $_LOCALE_BASE_CODE . ']'
                                                         ),
@@ -78,14 +78,14 @@
                                                         'description[' . $_LOCALE_BASE_CODE . ']',
                                                     'view' => 'INLINE',
                                                     'label' =>
-                                                        __('maknon::inputs.description.label') .
+                                                        __('member::inputs.description.label') .
                                                         ' <span class="text-danger"> [' .
                                                         $_LOCALE_BASE_CODE .
                                                         '] <span>',
                                                     'placeholder' => __(
-                                                        'maknon::inputs.description.placeholder'
+                                                        'member::inputs.description.placeholder'
                                                     ),
-                                                    'help' => __('maknon::inputs.description.help'),
+                                                    'help' => __('member::inputs.description.help'),
                                                     'value' => old(
                                                         'description[' . $_LOCALE_BASE_CODE . ']'
                                                     ),

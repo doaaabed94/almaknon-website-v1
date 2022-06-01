@@ -10,7 +10,7 @@ use View;
 use Bouncer;
 use LaravelLocalization;
 use Carbon\Carbon;
-use Modules\Member\Classes\Cms;
+use Modules\Member\Classes\Member;
 use Modules\Member\Entities\Ability;
 use Modules\Member\Entities\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -42,7 +42,6 @@ class MemberServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
         $this->registerVars();
-        
     }
 
     /**
@@ -53,6 +52,10 @@ class MemberServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
+        $this->app->singleton('Member', function($app){
+            return new \Modules\Member\Classes\Core;
+        });
     }
 
     /**

@@ -2,21 +2,20 @@
 
 namespace Modules\Maknon\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Modules\Maknon\Services\CarService;
 use Modules\Maknon\Entities\Car;
 use Modules\Maknon\Entities\Color;
 use Modules\Maknon\Entities\Condition;
+use Modules\Maknon\Entities\Currency;
 use Modules\Maknon\Entities\Fuel;
 use Modules\Maknon\Entities\Marka;
 use Modules\Maknon\Entities\Offer;
+use Modules\Maknon\Services\CarService;
 use Modules\Member\Entities\Country;
-
 use Validator;
-use Exception;
 
 class CarController extends Controller
 {
@@ -33,9 +32,9 @@ class CarController extends Controller
         $this->middleware('NeedPermissions:PERMA_DELETE_CAR')->only(['postPermaDelete']);
         $this->middleware('NeedPermissions:STATUS_UPDATE_CAR')->only(['postStatus']);
 
-        $this->service = new CarService();
+        $this->service          = new CarService();
         $this->validationsRules = $this->service->validationsRules;
-        $this->data['model'] = Car::query();
+        $this->data['model']    = Car::query();
     }
 
     public function index(Request $request)
@@ -45,17 +44,17 @@ class CarController extends Controller
     }
 
     public function create(Request $request)
-    {   
-        $this->data['locale']                   = $request->locale ? $request->locale : app()->getLocale();
-        $this->data['markas']                   = Marka::with('translations')->get();
-        $this->data['conditions']               = Condition::with('translations')->get();
-        $this->data['fuels']                    = Fuel::with('translations')->get();
-        $this->data['offers']                   = Offer::with('translations')->get();
-        $this->data['currencies']               = Offer::with('translations')->get();
-        $this->data['Countries']                = Country::with('translations')->get();
-        $this->data['colors']                = Color::with('translations')->get();
+    {
+        $this->data['locale']     = $request->locale ? $request->locale : app()->getLocale();
+        $this->data['markas']     = Marka::with('translations')->get();
+        $this->data['conditions'] = Condition::with('translations')->get();
+        $this->data['fuels']      = Fuel::with('translations')->get();
+        $this->data['offers']     = Offer::with('translations')->get();
+        $this->data['currencies'] = Currency::with('translations')->get();
+        $this->data['Countries']  = Country::with('translations')->get();
+        $this->data['colors']     = Color::with('translations')->get();
 
-        $this->data['CurrentUser']              = $request->user();
+        $this->data['CurrentUser'] = $request->user();
         return view('maknon::cars.create', $this->data);
     }
 
@@ -65,7 +64,8 @@ class CarController extends Controller
             $request->all(),
             $this->validationsRules['postCreate']
         );
-      
+        $this->data['_VALIDATOR_']->validate();
+
         $this->data['_VALIDATOR_']->after(function ($_VALIDATOR_) use ($request) {
 
             if (empty($request->name)) {
@@ -89,17 +89,25 @@ class CarController extends Controller
                 return $this->service->store($request->all());
             });
         } catch (Exception $e) {
-                return $this->service->response(500, [], $e);
+            return $this->service->response(500, [], $e);
         }
     }
 
     public function update(Request $request)
     {
-        $this->data['CurrentUser']  = $request->user();
-        $this->data['locale']       = $request->locale ? $request->locale : app()->getLocale();
-        if (!$this->data['data'] = $this->service->getModel($request->model))
+        $this->data['CurrentUser'] = $request->user();
+        $this->data['markas']      = Marka::with('translations')->get();
+        $this->data['conditions']  = Condition::with('translations')->get();
+        $this->data['fuels']       = Fuel::with('translations')->get();
+        $this->data['offers']      = Offer::with('translations')->get();
+        $this->data['currencies']  = Currency::with('translations')->get();
+        $this->data['Countries']   = Country::with('translations')->get();
+        $this->data['colors']      = Color::with('translations')->get();
+        $this->data['locale']      = $request->locale ? $request->locale : app()->getLocale();
+        if (!$this->data['data'] = $this->service->getModel($request->model)) {
             return $this->service->response(404);
-        
+        }
+
         return view('maknon::cars.update', $this->data);
     }
 
@@ -131,7 +139,7 @@ class CarController extends Controller
 
         try {
             return DB::transaction(function () use ($request) {
-              return $this->service->update($request->model, $request->all());
+                return $this->service->update($request->model, $request->all());
             });
         } catch (Exception $e) {
             return $this->service->response(500, [], $e);
@@ -160,7 +168,6 @@ class CarController extends Controller
         }
     }
 
-
     public function postPermaDelete(Request $request)
     {
         try {
@@ -185,8 +192,9 @@ class CarController extends Controller
 
     public function read(Request $request)
     {
-        if (!$this->data['model'] = $this->service->getModel($request->model, 'translations'))
+        if (!$this->data['model'] = $this->service->getModel($request->model, 'translations')) {
             return $this->service->response(404);
+        }
 
         return view('maknon::cars.read', $this->data);
     }

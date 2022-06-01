@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class Cars extends Migration
 {
@@ -31,7 +31,6 @@ class Cars extends Migration
             $table->integer('fuel_id')->nullable();
             $table->integer('category_id')->nullable();
 
-
             $table->string('transmission')->nullable();
             $table->string('colors')->nullable();
             $table->integer('kilometer')->nullable();
@@ -42,11 +41,11 @@ class Cars extends Migration
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
             $table->string('meta_keyword')->nullable();
-       
+
             $table->text('order')->nullable();
-            $table->enum('show_in_site' ,['yes','no'])->nullable();
+            $table->enum('show_in_site', ['yes', 'no'])->nullable();
             $table->text('slug')->nullable();
-    
+
             $table->string('status', 20)->default('ACTIVE');
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
@@ -68,8 +67,8 @@ class Cars extends Migration
                 'car_translations_unique'
             );
             $table->foreign('car_id')
-            ->references('id')->on('mk_cars')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_cars')
+                ->onDelete('cascade');
         });
 
         Schema::create('mk_categories', function (Blueprint $table) {
@@ -94,10 +93,9 @@ class Cars extends Migration
                 'category_translations_unique'
             );
             $table->foreign('category_id')
-            ->references('id')->on('mk_categories')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_categories')
+                ->onDelete('cascade');
         });
-
 
         Schema::create('mk_offers', function (Blueprint $table) {
             $table->increments('id');
@@ -121,8 +119,8 @@ class Cars extends Migration
                 'offer_translations_unique'
             );
             $table->foreign('offer_id')
-            ->references('id')->on('mk_offers')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_offers')
+                ->onDelete('cascade');
         });
 
         Schema::create('mk_conditions', function (Blueprint $table) {
@@ -146,10 +144,9 @@ class Cars extends Migration
                 'condition_translations_unique'
             );
             $table->foreign('condition_id')
-            ->references('id')->on('mk_conditions')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_conditions')
+                ->onDelete('cascade');
         });
-
 
         Schema::create('mk_fuels', function (Blueprint $table) {
             $table->increments('id');
@@ -172,10 +169,9 @@ class Cars extends Migration
                 'fuel_translations_unique'
             );
             $table->foreign('fuel_id')
-            ->references('id')->on('mk_fuels')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_fuels')
+                ->onDelete('cascade');
         });
-
 
         Schema::create('mk_markas', function (Blueprint $table) {
             $table->increments('id');
@@ -198,8 +194,22 @@ class Cars extends Migration
                 'marka_translations_unique'
             );
             $table->foreign('marka_id')
-            ->references('id')->on('mk_markas')
-            ->onDelete('cascade');
+                ->references('id')->on('mk_markas')
+                ->onDelete('cascade');
+        });
+
+        Schema::create('configs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('value')->nullable();
+            $table->string('code')->nullable();
+            $table->string('status', 20)->default('ACTIVE');
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
+            $table->timestamp('disabled_at')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

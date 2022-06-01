@@ -10,12 +10,13 @@
        {{-- <link rel="stylesheet" href="{{ mix('css/frontend.css') }}"> --}}
 
 
-        <link href="{{ URL::asset('public/frontend/css/font-awesome.min.css') }}" rel="stylesheet">
-        <link href="{{ URL::asset('public/frontend/css/theme.css') }}" rel="stylesheet">
+{{--         <link href="{{ URL::asset('public/frontend/css/font-awesome.min.css') }}" rel="stylesheet">
+ --}}        
+        
         <link href="{{ URL::asset('public/frontend/css/listings.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/detail.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/compare.css') }}" rel="stylesheet">
-
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/blog.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/pages.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/submits.css') }}" rel="stylesheet">
@@ -27,9 +28,11 @@
         @if($_LOCALE_ == 'ar' )
         <link href="{{ URL::asset('public/frontend/css/bootstrap-rtl.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/home-rtl.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('public/frontend/css/theme-rtl.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/custom.css') }}" rel="stylesheet">
         @else
         <link href="{{ URL::asset('public/frontend/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ URL::asset('public/frontend/css/theme.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('public/frontend/css/home.css') }}" rel="stylesheet">
         @endif
 

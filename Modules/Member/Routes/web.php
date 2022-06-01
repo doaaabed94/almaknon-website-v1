@@ -48,11 +48,11 @@ Route::prefix('dashboard')->name('member::')->group(function () {
         Route::get('{model}', 'RoleController@read')->name('roles.read');
     });
 
-    Route::prefix('config')->group(function () {
-        Route::get('update', 'ConfigController@update')->name('ConfigController@update');
-        Route::post('update', 'ConfigController@postUpdate')->name('ConfigController@postUpdate');
-        Route::get('{tab?}', 'ConfigController@read')->name('ConfigController@read');
-    });
+    // Route::prefix('config')->group(function () {
+    //     Route::get('update', 'ConfigController@update')->name('ConfigController@update');
+    //     Route::post('update', 'ConfigController@postUpdate')->name('ConfigController@postUpdate');
+    //     Route::get('{tab?}', 'ConfigController@read')->name('ConfigController@read');
+    // });
 
     Route::prefix('profile')->group(function () {
         Route::get('update', 'ProfileController@update')->name('ProfileController@update');
@@ -88,9 +88,20 @@ Route::prefix('dashboard')->name('member::')->group(function () {
         Route::post('{model}/toggle-status', 'CityController@postStatus')->name('CityController@postStatus');
         Route::get('{model}'               , 'CityController@read')->name('CityController@read');
     });
+
+  
 });
 
-
+Route::group([ 'prefix' => 'attachments' ], function() {
+    Route::post('/store',                      'AttachmentController@store')->name('AttachmentController@store');
+    Route::post('delete',                      'AttachmentController@destroy')->name('AttachmentController@destroy');
+});
+Route::get('img/{size}/{path}', 'ImageController@show')
+    ->where([
+        'size' => '^((\d+|auto)x(\d+|auto))|original$',
+        'path' => '.*'
+    ])
+    ->name('image');
 
 Route::get('login', 'AuthController@login')->name('login');
 Route::post('login', 'AuthController@postLogin')->name('postLogin');

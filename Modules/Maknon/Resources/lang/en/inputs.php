@@ -91,12 +91,12 @@ return [
 
     'min_price'          => [
         'label'       => 'min price ',
-        'placeholder' => '-- select min price  --',
+        'placeholder' => '-- enter min price  --',
         'help'        => '',
     ],
     'max_price'          => [
         'label'       => 'max price ',
-        'placeholder' => '-- select max price  --',
+        'placeholder' => '-- enter max price  --',
         'help'        => '',
     ],
 
@@ -150,27 +150,36 @@ return [
         'placeholder' => '-- enter meta keyword  --',
         'help'        => '',
     ],
- 'colors'       => [
+    'colors'             => [
         'label'       => 'colors',
         'placeholder' => '-- select colors  --',
         'help'        => '',
     ],
 
-         'code'       => [
+    'code'               => [
         'label'       => 'code',
         'placeholder' => '-- enter code  --',
         'help'        => '',
     ],
 
-     'symbol'       => [
+    'symbol'             => [
         'label'       => 'symbol',
         'placeholder' => '-- enter symbol  --',
         'help'        => '',
     ],
-     'currency'       => [
+    'currency'           => [
         'label'       => 'currency',
         'placeholder' => '-- select currency  --',
         'help'        => '',
     ],
-
+    'min_year'           => [
+        'label'       => 'min year',
+        'placeholder' => '-- select   --',
+        'help'        => '',
+    ],
+    'max_year'           => [
+        'label'       => 'max year',
+        'placeholder' => '-- select   --',
+        'help'        => '',
+    ],
 ];

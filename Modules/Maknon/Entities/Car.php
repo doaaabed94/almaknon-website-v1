@@ -7,7 +7,7 @@ use Astrotomic\Translatable\Translatable;
 use Modules\Member\Entities\Traits\TranslatableHelper;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Member\Entities\Traits\Disabable;
-
+use Modules\Member\Entities\Attachment;
 class Car extends Model
 {
     use Translatable, 
@@ -37,4 +37,39 @@ class Car extends Model
         'name',
         'description',
     ];
+
+        public function attachments(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
+
+
+    public function Marka()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\Marka' , 'marka_id' , 'id');
+    }
+    public function fuel()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\fuel' , 'fuel_id' , 'id');
+    }
+
+      public function Offer()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\Offer' , 'offer_id' , 'id');
+    }
+
+
+      public function Currency()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\Currency' , 'currency_id' , 'id');
+    }
+
+      public function Color()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\Color' , 'color_id' , 'id');
+    }
+
+         public function Condition()
+    {
+        return $this->belongsTo('Modules\Maknon\Entities\Condition' , 'condition_id' , 'id');
+    }
 }

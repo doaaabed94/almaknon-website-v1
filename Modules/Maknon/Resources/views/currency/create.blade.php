@@ -125,7 +125,7 @@
                             </div>
                         </div>
 
-                        @if ($CurrentUser->can('STATUS_UPDATE_currency') or $CurrentUser->isAn('ROOT'))
+                        @if ($CurrentUser->can('STATUS_UPDATE_CURRENCY') or $CurrentUser->isAn('ROOT'))
                             @include(
                                 'member::common-components.inputs.select',
                                 [

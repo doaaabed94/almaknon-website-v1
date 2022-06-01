@@ -142,7 +142,7 @@
                                         return 'data-dial="'. $V->dial_code .'"';
                                     },
                                     'text'        => function($K, $V){
-                                        return $V->SmartTranslation('name', app()->getLocale());
+                                        return $V->translateOrFirst(app()->getLocale())->name;
                                     },
                                     'values'      => function($K, $V){
                                         return $V->id;

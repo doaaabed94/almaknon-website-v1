@@ -7,7 +7,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Member\Entities\Traits\Disabable;
-use Modules\Member\Entities\Traits\FileManager;
 use Modules\Member\Entities\Traits\ModelExtenstion;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -16,8 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use FileManager,
-        Notifiable,
+    use Notifiable,
         SoftDeletes,
         Disabable,
         HasRolesAndAbilities,

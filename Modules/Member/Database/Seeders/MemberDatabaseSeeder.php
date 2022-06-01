@@ -556,11 +556,11 @@ class MemberDatabaseSeeder extends Seeder
     {
         $this->data['ROOT_USER'] = User::firstOrNew([
             // 'username' => 'root',
-            'email' => 'root@almaknon.com',
+            'email' => 'root@kabulturk.com',
         ]);
         $this->data['ROOT_USER']->first_name        = 'Root';
         $this->data['ROOT_USER']->last_name         = 'Account';
-        $this->data['ROOT_USER']->email             = 'root@almaknon.com';
+        $this->data['ROOT_USER']->email             = 'root@kabulturk.com';
         $this->data['ROOT_USER']->username          = 'root';
         $this->data['ROOT_USER']->password          = Hash::make('12345678');
         $this->data['ROOT_USER']->locale            = 'en';
@@ -571,11 +571,11 @@ class MemberDatabaseSeeder extends Seeder
 
         $this->data['SYSTEM_ADMIN_USER'] = User::firstOrNew([
             // 'username' => 'root',
-            'email' => 'super_admin@almaknon.com',
+            'email' => 'super_admin@kabulturk.com',
         ]);
         $this->data['SYSTEM_ADMIN_USER']->first_name        = 'super admin';
         $this->data['SYSTEM_ADMIN_USER']->last_name         = 'Account';
-        $this->data['SYSTEM_ADMIN_USER']->email             = 'super_admin@almaknon.com';
+        $this->data['SYSTEM_ADMIN_USER']->email             = 'super_admin@kabulturk.com';
         $this->data['SYSTEM_ADMIN_USER']->username          = 'super admin';
         $this->data['SYSTEM_ADMIN_USER']->password          = Hash::make('12345678');
         $this->data['SYSTEM_ADMIN_USER']->locale            = 'en';

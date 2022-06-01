@@ -11,7 +11,7 @@
         <a href="{{ route('currency.index') }}" > {!! __('maknon::main.currency_list') !!} </a>
         @endslot
         @slot('title_li')
-            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_currency'))
+            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_CURRENCY'))
                 <a href="{!! route('currency.create') !!}" class="btn btn-warning">
                     {!! __('member::strings.add_new') !!}
                 </a>
@@ -51,13 +51,13 @@
                                     <td>
                                       @include('member::common-components.action_datatable', [
                                         'id'                        => $data->id,
-                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_currencyS'),
-                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_currencyS'),
-                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_currencyS')) && $data->trashed(),
-                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_currencyS')) && !$data->trashed(),
-                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_currencyS'),
-                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_currencyS')) && $data->isEnabled(),
-                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_currencyS')) && $data->isDisabled(),
+                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_CURRENCY'),
+                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_CURRENCY'),
+                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_CURRENCY')) && $data->trashed(),
+                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_CURRENCY')) && !$data->trashed(),
+                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_CURRENCY'),
+                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_CURRENCY')) && $data->isEnabled(),
+                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_CURRENCY')) && $data->isDisabled(),
                                         
                                         'read_url'                  => route('currency.read', ['model' => $data->id]) ,
                                         'delete_url'                => route('currency.postDelete', ['model' => $data->id]) ,

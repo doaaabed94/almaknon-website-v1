@@ -7,6 +7,10 @@ use Astrotomic\Translatable\Translatable;
 use Modules\Member\Entities\Traits\TranslatableHelper;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Member\Entities\Traits\Disabable;
+use Modules\Member\Entities\Attachment;
+use Modules\CMS\Entities\Category;
+
+use Str;
 
 class Content extends Model
 {
@@ -24,4 +28,14 @@ class Content extends Model
         'description',
     ];
    
+        public function attachments(){
+        return $this->morphMany(Attachment::class,'attachable');
+    }
+
+
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id', 'id');
+    }
+
+
 }

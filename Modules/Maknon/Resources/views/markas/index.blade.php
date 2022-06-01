@@ -47,13 +47,13 @@
                                     <td>
                                       @include('member::common-components.action_datatable', [
                                         'id'                        => $data->id,
-                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_markaS'),
-                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_markaS'),
-                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_markaS')) && $data->trashed(),
-                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_markaS')) && !$data->trashed(),
-                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_markaS'),
-                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_markaS')) && $data->isEnabled(),
-                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_markaS')) && $data->isDisabled(),
+                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_MARKA'),
+                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_MARKA'),
+                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_MARKA')) && $data->trashed(),
+                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_MARKA')) && !$data->trashed(),
+                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_MARKA'),
+                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_MARKA')) && $data->isEnabled(),
+                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_MARKA')) && $data->isDisabled(),
                                         
                                         'read_url'                  => route('markas.read', ['model' => $data->id]) ,
                                         'delete_url'                => route('markas.postDelete', ['model' => $data->id]) ,

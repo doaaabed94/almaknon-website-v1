@@ -32,6 +32,7 @@
                             <tr>
                                 <th>{{ __('member::strings.datatable.id') }}</th>
                                 <th>{{ __('member::strings.datatable.name') }}</th>
+                                <th>{{ __('member::strings.datatable.type') }}</th>
                                 <th>{{ __('member::strings.datatable.status') }}</th>
                                 <th>{{ __('member::strings.datatable.actions') }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             </tr>
@@ -42,6 +43,7 @@
                                 <tr  @if($data->trashed()) style="background: #ffdbda;" @endif @if($data->isDisabled()) style="background: #ffebe8;" @endif>
                                     <td>{{$data->id}}</td>
                                     <td>{{ $data->translateOrFirst()->name }}</td>
+                                    <td>{{ $data->Category->name }}</td>
                                     <td><span class="btn btn-bold btn-sm btn-font-sm btn-{{ $data->status  == 'DISABLED' ? 'danger' : 'info' }}">
                                       {{ $data->status ? $data->status : '------' }}</span></td>
                                     <td>

@@ -91,6 +91,11 @@
                     </ul>
                 </li>
                 @endif
+
+
+
+
+                
                        @if ($IS_ROOT OR auth()->user()->can('READ_OFFERS') )
                 <li>
                     <a class="has-arrow waves-effect" href="javascript: void(0);">
@@ -226,7 +231,7 @@
 
                        @if ($IS_ROOT OR auth()->user()->can('CREATE_CURRENCY') )
                         <li>
-                            <a href="{{route('colors.create')}}">
+                            <a href="{{route('currency.create')}}">
                                 {!! __('member::strings.add_new') !!}
                             </a>
                         </li>
@@ -237,13 +242,13 @@
 
                 @endif
                 <!--------------------------------------->
-             @if ($IS_ROOT OR auth()->user()->can('READ_CONTENTS') 
+             @if ($IS_ROOT OR auth()->user()->can('READ_CONTENT') 
                OR auth()->user()->can('READ_CATEGORY')
                OR auth()->user()->can('READ_SUB_CATEGORY') )
                 <li class="menu-title">
                     {!! __('cms::strings.cms_management') !!}
                 </li>
-                @if ( $IS_ROOT OR auth()->user()->can('READ_CONTENTS') OR auth()->user()->can('CREATE_CONTENTS') )
+                @if ( $IS_ROOT OR auth()->user()->can('READ_CONTENT') OR auth()->user()->can('CREATE_CONTENT') )
                 <li>
                     <a class="has-arrow waves-effect" href="javascript: void(0);">
                         <i class="mdi mdi-inbox-full">
@@ -253,7 +258,7 @@
                         </span>
                     </a>
                     <ul aria-expanded="false" class="sub-menu">
-                        @if ( $IS_ROOT OR auth()->user()->can('READ_CONTENTS') )
+                        @if ( $IS_ROOT OR auth()->user()->can('READ_CONTENT') )
                         <li>
                             <a href="{{ route('cms::contents.index') }}">
                                 {!! trans_choice('member::strings.list_all', 0) !!}
@@ -261,7 +266,7 @@
                         </li>
                         @endif
 
-                       @if ( $IS_ROOT OR auth()->user()->can('CREATE_CONTENTS') )
+                       @if ( $IS_ROOT OR auth()->user()->can('CREATE_CONTENT') )
                         <li>
                             <a href="{{route('cms::contents.create')}}">
                                 {!! __('member::strings.add_new') !!}
@@ -428,6 +433,26 @@
                 </li>
                 @endif
 
+       @if ($IS_ROOT OR auth()->user()->can('READ_CONFIG') )
+                <li>
+                    <a class="has-arrow waves-effect" href="javascript: void(0);">
+                        <i class="mdi mdi-inbox-full">
+                        </i>
+                        <span>
+                            {!! __('maknon::main.config') !!}
+                        </span>
+                    </a>
+                    <ul aria-expanded="false" class="sub-menu">
+                        @if ($IS_ROOT OR auth()->user()->can('READ_CONFIG') )
+                        <li>
+                            <a href="{{ route('configs.index') }}">
+                                {!! trans_choice('member::strings.list_all', 0) !!}
+                            </a>
+                        </li>
+                        @endif
+                    </ul>
+                </li>
+                @endif
                 
                 @endif
             </ul>

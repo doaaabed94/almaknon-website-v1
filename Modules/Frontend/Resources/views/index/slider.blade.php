@@ -1,8 +1,8 @@
-    <section class="b-slider">
+{{--     <section class="b-slider">
         <div id="carousel" class="slide carousel carousel-fade">
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="{{ URL::asset('public/frontend//media/main-slider/5.jpg') }}" alt="sliderImg" />
+                    <img src="{{ URL::asset('public/frontend/media/main-slider/5.jpg') }}" alt="sliderImg" />
                     <div class="container">
                         <div class="carousel-caption b-slider__info">
                             <h3>{!! __('frontend::main.Find_your_Car') !!}</h3>
@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="{{ URL::asset('public/frontend//media/main-slider/6.jpg') }}" alt="sliderImg" />
+                    <img src="{{ URL::asset('public/frontend/media/main-slider/6.jpg') }}" alt="sliderImg" />
                     <div class="container">
                         <div class="carousel-caption b-slider__info">
                             <h3>{!! __('frontend::main.Find_your_Car') !!}</h3>
@@ -31,4 +31,29 @@
                 <span class="fa fa-angle-left m-control-left"></span>
             </a>
         </div>
+    </section> --}}
+    
+
+    <section class="b-slider">
+        <div id="carousel" class="slide carousel carousel-fade">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="{{ URL::asset('public/frontend/media/main-slider/5.jpg') }}" alt="sliderImg" />
+                    <div class="container">
+                        <div class="carousel-caption b-slider__info d-block">
+                            <h3>{!! __('frontend::main.Find_your_Car') !!}</h3>
+                          {{--   <h2>Lamborghini Aventador</h2>
+                            <p>Model 2022 <span>$234,900</span></p>
+                            <a class="btn d-block m-btn" href="{{ route('CarController@index') }}">{!! __('frontend::main.discover_cars') !!}<span class="fa fa-angle-right"></span></a> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+
+    <style type="text/css">
+        .b-slider h3{
+            width: 100%;
+        }
+    </style>

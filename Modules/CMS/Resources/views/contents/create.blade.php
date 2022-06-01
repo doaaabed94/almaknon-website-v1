@@ -27,6 +27,7 @@
                     <div id="show_inline_general_error">
                     </div>
                     <div class="col-lg-12 mb-5">
+
                         @include(
                             'member::common-components.inputs.select',
                             [
@@ -119,6 +120,22 @@
                             ]
                             )
 
+                            @include('member::common-components.inputs.dropzone', [
+                                'options' => [
+                                    'id' => 'main_contant_img',
+                                    'name' => 'main_contant_img',
+                                    'label' => __('cms::strings.main_contant_img'),
+                                    'attachments' => [],
+                                    'required' => false,
+                                    'inline' => false,
+                                    'validation_rules' => 'mimes:jpeg,jpg,png',
+                                    'container_class' => 'col-md-6',
+                                    'sub_folder' => 'main_contant_img',
+                                    'max_files' =>  1,
+                                ],
+                            ])
+
+
                             <ul class="nav nav-tabs" role="tablist">
                                 @foreach ($_ALL_LOCALES_ as $_LOCALE_BASE_CODE => $_LOCALE_DETAILS)
                                 <li class="nav-item">
@@ -201,8 +218,25 @@
                         </span>
                     </div>
                     @endforeach
+
+
                 </div>
 
+
+                            @include('member::common-components.inputs.dropzone', [
+                                'options' => [
+                                    'id' => 'contant_img',
+                                    'name' => 'contant_img',
+                                    'label' => __('cms::strings.contant_img'),
+                                    'attachments' => [],
+                                    'required' => false,
+                                    'inline' => false,
+                                    'validation_rules' => 'mimes:jpeg,jpg,png',
+                                    'container_class' => 'col-md-12',
+                                    'sub_folder' => 'contant_img',
+                                ],
+                            ])
+                            
                 @include(
                     'member::common-components.inputs.select',
                     [

@@ -18,13 +18,13 @@ class ContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('NeedPermissions:READ_CONTENTS')->only(['index', 'postIndex', 'read']);
-        $this->middleware('NeedPermissions:CREATE_CONTENTS')->only(['create', 'postCreate']);
-        $this->middleware('NeedPermissions:UPDATE_CONTENTS')->only(['update', 'postUpdate']);
-        $this->middleware('NeedPermissions:DELETE_CONTENTS')->only(['postDelete']);
-        $this->middleware('NeedPermissions:RESTORE_CONTENTS')->only(['postRestore']);
-        $this->middleware('NeedPermissions:PERMA_DELETE_CONTENTS')->only(['postPermaDelete']);
-        $this->middleware('NeedPermissions:STATUS_UPDATE_CONTENTS')->only(['postStatus']);
+        $this->middleware('NeedPermissions:READ_CONTENT')->only(['index', 'postIndex', 'read']);
+        $this->middleware('NeedPermissions:CREATE_CONTENT')->only(['create', 'postCreate']);
+        $this->middleware('NeedPermissions:UPDATE_CONTENT')->only(['update', 'postUpdate']);
+        $this->middleware('NeedPermissions:DELETE_CONTENT')->only(['postDelete']);
+        $this->middleware('NeedPermissions:RESTORE_CONTENT')->only(['postRestore']);
+        $this->middleware('NeedPermissions:PERMA_DELETE_CONTENT')->only(['postPermaDelete']);
+        $this->middleware('NeedPermissions:STATUS_UPDATE_CONTENT')->only(['postStatus']);
 
         $this->service          = new ContentService();
         $this->validationsRules = $this->service->validationsRules;

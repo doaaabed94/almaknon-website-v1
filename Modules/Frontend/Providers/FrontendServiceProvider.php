@@ -8,6 +8,8 @@ use Modules\Maknon\Entities\Condition;
 use Modules\Maknon\Entities\Fuel;
 use Modules\Maknon\Entities\Marka;
 use Modules\Maknon\Entities\Offer;
+use Modules\CMS\Entities\Content;
+use Modules\Maknon\Entities\Config;
 use Modules\Maknon\Entities\Car;
 use Modules\Member\Entities\Country;
 use Illuminate\Support\Facades\Cache;
@@ -37,6 +39,7 @@ class FrontendServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerData();
+        $this->registerBlogData();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
     }
 
@@ -123,46 +126,39 @@ class FrontendServiceProvider extends ServiceProvider
 
     public function registerData()
     {
-       //  $markas =  Cache::remember('markas_data' . app()->getLocale(), 1440, function () {
-       //      return Marka::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+        $markas =  Cache::remember('markas_data' . app()->getLocale(), 1440, function () {
+            return Marka::translatedIn(app()->getLocale())->with('translations')->get();
+        });
        
-       // $conditions =  Cache::remember('conditions_data' . app()->getLocale(), 1440, function () {
-       //      return Condition::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+       $conditions =  Cache::remember('conditions_data' . app()->getLocale(), 1440, function () {
+            return Condition::translatedIn(app()->getLocale())->with('translations')->get();
+        });
 
-       // $fuels =  Cache::remember('fuels_data' . app()->getLocale(), 1440, function () {
-       //      return Fuel::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+       $fuels =  Cache::remember('fuels_data' . app()->getLocale(), 1440, function () {
+            return Fuel::translatedIn(app()->getLocale())->with('translations')->get();
+        });
 
-       // $offers =  Cache::remember('offers_data' . app()->getLocale(), 1440, function () {
-       //      return Offer::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+       $offers =  Cache::remember('offers_data' . app()->getLocale(), 1440, function () {
+            return Offer::translatedIn(app()->getLocale())->with('translations')->get();
+        });
 
-       // $currencies =  Cache::remember('currencies_data' . app()->getLocale(), 1440, function () {
-       //      return Offer::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+       $currencies =  Cache::remember('currencies_data' . app()->getLocale(), 1440, function () {
+            return Offer::translatedIn(app()->getLocale())->with('translations')->get();
+        });
 
-       // $countries =  Cache::remember('Countries_data' . app()->getLocale(), 1440, function () {
-       //      return Country::translatedIn(app()->getLocale())->with('translations')->get();
-       //  });
+       $countries =  Cache::remember('Countries_data' . app()->getLocale(), 1440, function () {
+            return Country::translatedIn(app()->getLocale())->with('translations')->get();
+        });
+
+       $configs = Config::get();
 
        //  $markas =   Marka::translatedIn(app()->getLocale())->with('translations')->get();
        // $conditions =   Condition::translatedIn(app()->getLocale())->with('translations')->get();
        // $fuels =   Fuel::translatedIn(app()->getLocale())->with('translations')->get();
        // $offers =   Offer::translatedIn(app()->getLocale())->with('translations')->get();
        // $countries =   Country::translatedIn(app()->getLocale())->with('translations')->get();
-       // $last_cars =   Car::translatedIn(app()->getLocale())->with(['translations','Marka','Condition','Fuel','Offer'])->paginate(8);
-
-
-
-        $markas =   [];
-       $conditions =  [];;
-       $fuels =    [];
-       $offers =  [];
-       $countries =  [];
-       $last_cars =  [];
-
+        $last_cars =   Car::translatedIn(app()->getLocale())->with(['translations'])->where('show_in_site', 'yes')->take(8)->get();
+        $last_blogs = Content::whereIn('category_id',['10','11'] )->translatedIn(app()->getLocale())->where('show_in_site', 'yes')->with('translations','attachments')->orderby('created_at', 'DESC')->take(3)->get();
         View::share('markas', $markas);
         View::share('conditions', $conditions);
         View::share('fuels', $fuels);
@@ -170,6 +166,28 @@ class FrontendServiceProvider extends ServiceProvider
        // View::share('currencies', $currencies);
         View::share('countries', $countries);
         View::share('last_cars', $last_cars);
+        View::share('last_blogs', $last_blogs);
+        View::share('configs', $configs);
 
     }
+
+
+     public function registerBlogData()
+    {
+
+       $articles =  Cache::remember('blogs' . app()->getLocale(), 1440, function () {
+            return Content::whereIn('category_id',['10','11'] )->translatedIn(app()->getLocale())->with('translations','attachments')->orderby('created_at', 'DESC')->take(6)->get();
+        });
+
+       $static_pages =  Cache::remember('static' . app()->getLocale(), 1440, function () {
+            return Content::where('category_id', '5')->translatedIn(app()->getLocale())->with('translations','attachments')->get();
+        });
+
+        $who_we_are =   Content::where('category_id', '5')->where('slug', 'who-we-are')->first();
+
+      View::share('static_pages', $static_pages);
+        View::share('articles', $articles);
+        View::share('who_we_are', $who_we_are);
+    }
+
 }

@@ -2,19 +2,19 @@
 
 return [
 
-    'title' => [
+    'title'              => [
         'label'       => 'الأسم',
         'placeholder' => '--  ادخل الأسم --',
         'help'        => '',
     ],
 
-    'description' => [
+    'description'        => [
         'label'       => 'الشرح',
         'placeholder' => '-- ادخل الشرح --',
         'help'        => '',
     ],
 
-    'address' => [
+    'address'            => [
         'label'       => 'العنوان',
         'placeholder' => '-- ادخل العنوان --',
         'help'        => '',
@@ -26,104 +26,101 @@ return [
         'help'        => '',
     ],
 
-   
-    'language' => [
+    'language'           => [
         'label'       => 'اللغة',
         'placeholder' => '-- اختر اللغة --',
         'help'        => '',
     ],
 
-
-    'note' => [
+    'note'               => [
         'label'       => 'ملاحظات',
         'placeholder' => '-- ادخل ملاحظتك --',
         'help'        => '',
     ],
 
-    'state' => [
+    'state'              => [
         'label'       => 'الولاية',
         'placeholder' => '-- اختر  --',
         'help'        => '',
     ],
-    
-    'order' => [
+
+    'order'              => [
         'label'       => 'الترتيب',
         'placeholder' => '-- ادخل الترتيب لعرض العنصر  --',
         'help'        => '',
     ],
-    'slug' => [
+    'slug'               => [
         'label'       => 'عنوان الرابط slug',
         'placeholder' => '-- ادخل عنوان الرابط slug  --',
         'help'        => '',
     ],
-    'show_in_site' => [
+    'show_in_site'       => [
         'label'       => 'هل يظهر في الموقع',
         'placeholder' => '-- اختر  --',
         'help'        => '',
     ],
 
-    'type' => [
+    'type'               => [
         'label'       => 'النوع',
         'placeholder' => '-- اختر النوع  --',
         'help'        => '',
     ],
 
-    'marka' => [
+    'marka'              => [
         'label'       => 'ماركة السيارة',
         'placeholder' => '-- اختر  ماركة السيارة  --',
         'help'        => '',
     ],
 
-    'offer' => [
+    'offer'              => [
         'label'       => 'النوع',
         'placeholder' => '-- اختر  العرض  --',
         'help'        => '',
     ],
 
-
-    'condition' => [
+    'condition'          => [
         'label'       => 'حالة السيارة',
         'placeholder' => '-- اختر حالة السيارة  --',
         'help'        => '',
     ],
 
-    'fuel' => [
+    'fuel'               => [
         'label'       => 'نوغ الوقود',
         'placeholder' => '-- اختر نوغ الوقود  --',
         'help'        => '',
     ],
 
-    'transmission' => [
+    'transmission'       => [
         'label'       => 'ناقل الحركة',
         'placeholder' => '-- اختر  ناقل الحركة  --',
         'help'        => '',
     ],
 
-    'transmission' => [
+    'transmission'       => [
         'label'       => 'ناقل الحركة',
         'placeholder' => '-- اختر  ناقل الحركة  --',
         'help'        => '',
     ],
 
-    'transmission' => [
+    'transmission'       => [
         'label'       => 'ناقل الحركة',
         'placeholder' => '-- اختر  ناقل الحركة  --',
         'help'        => '',
     ],
 
-    'min_price' => [
+    'min_price'          => [
         'label'       => 'ادني سعر',
-        'placeholder' => '-- اختر  ادني سعر   --',
+        'placeholder' => '-- ادخل  ادني سعر   --',
         'help'        => '',
     ],
 
-    'max_price' => [
+    'max_price'          => [
         'label'       => 'اقصى سعر',
-        'placeholder' => '-- اختر  اقصى سعر  --',
+        'placeholder' => '-- ادخل  اقصى سعر  --',
         'help'        => '',
     ],
 
-        'factory_country'    => [
+    'factory_country'    => [
         'label'       => 'بلد التصنيع',
         'placeholder' => '-- اختر بلد التصنيع  --',
         'help'        => '',
@@ -172,27 +169,37 @@ return [
         'label'       => 'meta keyword',
         'placeholder' => '-- ادخل meta keyword  --',
         'help'        => '',
-        ],
- 'colors'       => [
+    ],
+    'colors'             => [
         'label'       => 'اللون',
         'placeholder' => '-- اختر اللون  --',
         'help'        => '',
     ],
-    
-     'code'       => [
+
+    'code'               => [
         'label'       => 'اختصار العملة',
         'placeholder' => '-- اختر اختصار العملة  --',
         'help'        => '',
     ],
 
-     'symbol'       => [
+    'symbol'             => [
         'label'       => 'الرمز',
         'placeholder' => '-- اختر الرمز  --',
         'help'        => '',
     ],
-     'currency'       => [
+    'currency'           => [
         'label'       => 'العملة',
         'placeholder' => '-- اختر العملة  --',
         'help'        => '',
     ],
-];
+    'min_year'           => [
+        'label'       => '(من) سنى تصنيع',
+        'placeholder' => '-- اختر   --',
+        'help'        => '',
+    ],
+    'max_year'           => [
+        'label'       => '(الى) سنى تصنيع',
+        'placeholder' => '-- اختر   --',
+        'help'        => '',
+    ],
+],

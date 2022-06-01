@@ -24,3 +24,9 @@
 <!-- form advanced init -->
 <script src="{{URL::asset('/js/pages/form-advanced.init.js')}}"></script>
         <!-- App js -->
+  <script src="{{ URL::asset('/libs/dropzone/dropzone.min.js') }}"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+    </script>
+
+        @stack('add_scripts')

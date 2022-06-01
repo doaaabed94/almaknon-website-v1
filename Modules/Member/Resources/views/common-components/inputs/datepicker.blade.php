@@ -3,7 +3,7 @@
         $_X = array_merge([
             'id'          => null,
             'name'        => null,
-            'type'        => 'text',
+            'type'        => 'date',
             'label'       => null,
             'placeholder' => null,
             'help'        => null,
@@ -14,12 +14,13 @@
             'label_size'  => 'col-lg-3',
             'input_size'  => 'col-lg-8',
             'disabled'    => false,
-            'readonly'    => true,
+            'readonly'    => false,
             'errors'      => $errors,
             'showErrors'  => true,
             'format'      => 'yyyy-mm-dd',
             'today'       => 'true',
             'clear'       => 'true',
+            'container_class' => null,
         ], $options);
     @endphp
     @if($_X['view'] == 'INLINE')
@@ -38,7 +39,7 @@
             </div>
         </div>
     @elseif($_X['view'] == 'DEFAULT')
-        <div class="form-group">
+        <div class="form-group {!! $_X['container_class'] !!}">
             @if ($_X['label'])
                 <label>{!! $_X['label'] !!}</label>
             @endif
@@ -52,16 +53,12 @@
         </div>
     @endif
 
-    @push('script')
+    @push('add_scripts')
         <script>
             $('.datepicker_{{ $_X['name'] }}').datepicker({
                 format: '{{ $_X['format'] }}',
-                rtl: KTUtil.isRTL(),
                 clearBtn: {{ $_X['clear'] }},
-                todayBtn: "linked",
                 todayHighlight: {{ $_X['today'] }},
-                templates: arrows,
-                orientation   : 'bottom left',
                 autoclose: true
             });
         </script>

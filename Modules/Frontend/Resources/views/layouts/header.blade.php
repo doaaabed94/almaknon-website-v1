@@ -20,9 +20,9 @@
                 <div class="col-md-4 col-xs-6">
                     <nav class="b-topBar__nav">
                         <ul>
-                            <li><a href="#">{!! __('frontend::main.cart') !!}</a></li>
-                            <li><a href="#">{!! __('frontend::main.register') !!}</a></li>
-                            <li><a href="#">{!! __('frontend::main.sign_in') !!}</a></li>
+                            <li><a href="{{ route('VisitorController@favorite') }}">{!! __('frontend::main.favorite') !!}</a></li>
+                            <li><a href="{{ route('VisitorController@login') }}">{!! __('frontend::main.register') !!}</a></li>
+                            <li><a href="{{ route('VisitorController@register') }}">{!! __('frontend::main.sign_in') !!}</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -66,11 +66,11 @@
                         </div>
                         <div class="collapse navbar-collapse navbar-main-slide" id="nav">
                             <ul class="navbar-nav-menu">
-                                <li><a href="/">{!! __('frontend::main.home') !!}</a></li>
-                                <li><a href="/cars">{!! __('frontend::main.List_of_Car') !!}</a></li>
-                                <li><a href="/about">{!! __('frontend::main.About') !!}</a></li>
-                                <li><a href="/article">{!! __('frontend::main.Blog') !!}</a></li>
-                                <li><a href="/contacts">{!! __('frontend::main.Contact') !!}</a></li>
+                                <li><a href="{{ route('frontend.home') }}">{!! __('frontend::main.home') !!}</a></li>
+                                <li><a href="{{ route('CarController@index') }}">{!! __('frontend::main.List_of_Car') !!}</a></li>
+                                <li><a href="{{ route('BlogController@static' , ['slug' => 'aboutus']) }}">{!! __('frontend::main.About') !!}</a></li>
+                                <li><a href="{{ route('BlogController@index') }}">{!! __('frontend::main.Blog') !!}</a></li>
+                                <li><a href="{{ route('BlogController@static', ['slug' => 'contactus']) }}">{!! __('frontend::main.Contact') !!}</a></li>
                             </ul>
                         </div>
                     </div>

@@ -18,13 +18,13 @@ class ColorController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('NeedPermissions:READ_COLORS')->only(['index', 'postIndex', 'read']);
-        $this->middleware('NeedPermissions:CREATE_COLORS')->only(['create', 'postCreate']);
-        $this->middleware('NeedPermissions:UPDATE_COLORS')->only(['update', 'postUpdate']);
-        $this->middleware('NeedPermissions:DELETE_COLORS')->only(['postDelete']);
-        $this->middleware('NeedPermissions:RESTORE_COLORS')->only(['postRestore']);
-        $this->middleware('NeedPermissions:PERMA_DELETE_COLORS')->only(['postPermaDelete']);
-        $this->middleware('NeedPermissions:STATUS_UPDATE_COLORS')->only(['postStatus']);
+        $this->middleware('NeedPermissions:READ_COLOR')->only(['index', 'postIndex', 'read']);
+        $this->middleware('NeedPermissions:CREATE_COLOR')->only(['create', 'postCreate']);
+        $this->middleware('NeedPermissions:UPDATE_COLOR')->only(['update', 'postUpdate']);
+        $this->middleware('NeedPermissions:DELETE_COLOR')->only(['postDelete']);
+        $this->middleware('NeedPermissions:RESTORE_COLOR')->only(['postRestore']);
+        $this->middleware('NeedPermissions:PERMA_DELETE_COLOR')->only(['postPermaDelete']);
+        $this->middleware('NeedPermissions:STATUS_UPDATE_COLOR')->only(['postStatus']);
 
         $this->service = new ColorService();
         $this->validationsRules = $this->service->validationsRules;

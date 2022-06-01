@@ -106,8 +106,8 @@
                     isSlider = $slider.length;
 
                 if (isSlider) {
-                    var minVal = $slider.data('min-val') ? $slider.data('min-val') : 100,
-                        maxVal = $slider.data('max-val') ? $slider.data('max-val') : 1000;
+                    var minVal = $slider.data('min-val') ? $slider.data('min-val') : 1000,
+                        maxVal = $slider.data('max-val') ? $slider.data('max-val') : 10000000;
 
                     $slider.slider({
                         min: minVal,

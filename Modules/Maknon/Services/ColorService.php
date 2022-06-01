@@ -31,10 +31,10 @@ class ColorService extends BaseService
     {
         $this->data['model'] = Color::query();
 
-        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_COLORS'))
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_COLOR'))
             $this->data['model']->withTrashed();
 
-        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_COLORS'))
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_COLOR'))
             $this->data['model']->withDisabled();
         if ($relations)
             $this->data['model']->with($relations);
@@ -56,10 +56,10 @@ class ColorService extends BaseService
             END) AS new_status')
         ]);
         
-        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_COLORS')) {
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('RESTORE_COLOR')) {
             $this->data['ALL_MODEL_DATA_']->withTrashed();
         }
-        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_COLORS')) {
+        if (auth()->user()->isAn('ROOT') or auth()->user()->can('STATUS_UPDATE_COLOR')) {
             $this->data['ALL_MODEL_DATA_']->withDisabled();
         }
  

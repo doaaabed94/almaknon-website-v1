@@ -2,18 +2,25 @@
 
 namespace Modules\Member\Http\Controllers;
 
-use App\User;
-use Auth;
-use Carbon\Carbon;
 use DB;
-use Exception;
+use Auth;
 use Hash;
-use Illuminate\Http\Request;
-use Modules\Member\Entities\City;
-use Modules\Member\Entities\Country;
-use Modules\Member\Http\Exceptions\PermissionsException;
-use Modules\Member\Http\Responses\CrudResponse;
 use Validator;
+use Exception;
+use Bouncer;
+use DataTables;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\User;
+use Modules\Member\Entities\Country;
+use Modules\Member\Entities\City;
+use Modules\Member\Entities\Role;
+use Modules\Member\Entities\Ability;
+use Modules\Member\Entities\AbilityGroup;
+use Modules\Member\Http\Responses\CrudResponse;
+use Modules\Member\Http\Exceptions\PermissionsException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ProfileController extends AdminBaseController
 {
@@ -42,7 +49,7 @@ class ProfileController extends AdminBaseController
             'city'             => 'nullable|exists:cities,id',
             'email'            => 'required_without_all:phone_number|email|unique:users,email',
             'phone_number'     => 'required_without_all:email|unique:users,phone_number',
-            'address'          => 'nullable|max:2500',
+            'address'      => 'nullable|max:2500',
             'username'         => 'nullable|unique:users,username',
             'gender'           => 'nullable|in:M,F,U',
             'birthday'         => 'nullable|date_format:Y-m-d',
@@ -57,7 +64,7 @@ class ProfileController extends AdminBaseController
     public function update(Request $request)
     {
         $this->data['locale']      = $request->locale ? $request->locale : app()->getLocale();
-        $this->data['model']       = User::with('roles')->findOrFail(auth()->user()->id);
+        $this->data['model']       = User::with('roles')->findOrFail( auth()->user()->id );
         $this->data['CurrentUser'] = $request->user();
         $this->data['Countries']   = Country::with('translations')->get();
         $this->data['model']->setRelation(
@@ -70,12 +77,12 @@ class ProfileController extends AdminBaseController
     {
         try {
             $this->data['model'] = User::findOrFail(auth()->user()->id);
-        } catch (Exception $e) {
+        } catch(Exception $e) {
             return redirect()->route('member::errors.404', $this->data);
         }
 
-        static::$validationsRules['postUpdate']['email']        = static::$validationsRules['postUpdate']['email'] . ',' . $this->data['model']->id;
-        static::$validationsRules['postUpdate']['username']     = static::$validationsRules['postUpdate']['username'] . ',' . $this->data['model']->id;
+        static::$validationsRules['postUpdate']['email']        = static::$validationsRules['postUpdate']['email']        . ',' . $this->data['model']->id;
+        static::$validationsRules['postUpdate']['username']     = static::$validationsRules['postUpdate']['username']     . ',' . $this->data['model']->id;
         static::$validationsRules['postUpdate']['phone_number'] = static::$validationsRules['postUpdate']['phone_number'] . ',' . $this->data['model']->id;
 
         $this->data['CurrentUser'] = $request->user();
@@ -83,16 +90,17 @@ class ProfileController extends AdminBaseController
             $request->all(), static::$validationsRules['postUpdate']
         );
 
-        $this->data['_VALIDATOR_']->after(function ($validator) use ($request) {
+        $this->data['_VALIDATOR_']->after(function ($validator)use($request) {
             if (!empty($request->password)) {
                 if (!$this->data['CurrentUser']->isAn('ROOT', 'SYSTEM_ADMIN')) {
-                    if (!Hash::check($request->current_password, $this->data['CurrentUser']->password)) {
+                    if (! Hash::check($request->current_password, $this->data['CurrentUser']->password)) {
                         $validator->errors()->add(
                             'current_password', __('member::strings.current_password_is_incorrect')
                         );
                     }
-                } else {
-                    if (!Hash::check($request->current_password, $this->data['model']->password)) {
+                } 
+                else {
+                    if (! Hash::check($request->current_password, $this->data['model']->password)) {
                         $validator->errors()->add(
                             'current_password', __('member::strings.current_password_is_incorrect')
                         );
@@ -104,7 +112,7 @@ class ProfileController extends AdminBaseController
         $this->data['_VALIDATOR_']->validate();
 
         try {
-            DB::transaction(function () use ($request) {
+            DB::transaction(function()use($request){
                 $this->data['model']->first_name   = $request->first_name;
                 $this->data['model']->last_name    = $request->last_name;
                 $this->data['model']->locale       = $request->user_locale;
@@ -117,26 +125,28 @@ class ProfileController extends AdminBaseController
                 $this->data['model']->gender       = $request->gender;
                 $this->data['model']->birthday     = empty($request->birthday) ? null : Carbon::parse($request->birthday)->toDateTimeString();
                 if (!empty($request->password)) {
-                    $this->data['model']->password = Hash::make($request->password);
+                    $this->data['model']->password = Hash::make( $request->password );
                 }
                 $this->data['model']->save();
                 if ($request->hasFile('avatar')) {
-                    $this->data['model']->_deleteImg(storage_path('uploads/' . $this->data['model']->avatar));
-                    $this->data['AVATAR'] = $this->data['model']->_storeImg($request->file('avatar') ,'user' ,'public_uploads');
+                    app()->make('GraphManager')->remove( $this->data['model']->avatar );
+                    $this->data['AVATAR'] = $request->file('avatar')->store('user', 'graph');
                     $this->data['model']->avatar = $this->data['AVATAR'];
                 }
                 $this->data['model']->save();
             });
-        } catch (PermissionsException $e) {
+        }
+        catch(PermissionsException $e) {
             return new CrudResponse([
                 'success'             => false,
                 'type'                => 'toastr',
                 'message_type'        => 'error',
                 'message_title'       => __('member::strings.permissions_error.title'),
                 'message_description' => __('member::strings.permissions_error.description'),
-                'errors'              => [],
+                'errors'              => []
             ], 500);
-        } catch (Exception $e) {
+        } 
+        catch(Exception $e) {
             return new CrudResponse([
                 'success'             => false,
                 'type'                => 'toastr',
@@ -150,7 +160,7 @@ class ProfileController extends AdminBaseController
                         'line'    => $e->getLine(),
                         'file'    => $e->getFile(),
                     ],
-                ],
+                ]
             ], 500);
         }
 
@@ -161,7 +171,7 @@ class ProfileController extends AdminBaseController
             'message_title'       => __('member::strings.save_success.title'),
             'message_description' => __('member::strings.save_success.description'),
             'errors'              => [],
-            'redirect_to'         => route('member::ProfileController@update'),
+                            'redirect_to'         => route('member::ProfileController@update'),
         ], 200);
     }
 }

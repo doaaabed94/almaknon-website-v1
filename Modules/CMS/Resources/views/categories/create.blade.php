@@ -1,13 +1,13 @@
 @extends('member::layouts.master')
 
 @section('title')
-    {!! __('maknon::main.markas_list') !!} - {!! __('member::strings.add_new') !!}
+    {!! __('cms::strings.categories_list') !!} - {!! __('member::strings.add_new') !!}
 @endsection
 
 @section('content')
     @component('member::common-components.breadcrumb')
         @slot('title')
-        <a href="{{ route('markas.index') }}" > {!! __('maknon::main.markas_list') !!} </a>
+        <a href="{{ route('cms::categories.index') }}" > {!! __('cms::strings.categories_list') !!} </a>
         @endslot
         @slot('li_1')
             {!! __('member::strings.add_new') !!}
@@ -24,6 +24,22 @@
                         <div id="show_inline_general_error"></div>
 
                         <div class="col-lg-8 mb-5">
+                             @include(
+                                                'member::common-components.inputs.text',
+                                                [
+                                                    'options' => [
+                                                        'name' => 'code',
+                                                        'view' => 'INLINE',
+                                                        'label' => __('cms::strings.code') ,
+                                                        'placeholder' =>' ',
+                                                        'help' => ' ',
+                                                        'value' => old('code'),
+                                                        'label_size' => 'col-lg-2',
+                                                        'input_size' => 'col-lg-10',
+                                                    ],
+                                                ]
+                                            )
+
                             <ul class="nav nav-tabs" role="tablist">
                                 @foreach ($_ALL_LOCALES_ as $_LOCALE_BASE_CODE => $_LOCALE_DETAILS)
                                     <li class="nav-item">
@@ -48,14 +64,14 @@
                                                         'name' => 'name[' . $_LOCALE_BASE_CODE . ']',
                                                         'view' => 'INLINE',
                                                         'label' =>
-                                                            __('maknon::inputs.title.label') .
+                                                            __('member::inputs.title.label') .
                                                             ' <span class="text-danger"> [' .
                                                             $_LOCALE_BASE_CODE .
                                                             '] <span>',
                                                         'placeholder' => __(
-                                                            'maknon::inputs.title.placeholder'
+                                                            'member::inputs.title.placeholder'
                                                         ),
-                                                        'help' => __('maknon::inputs.title.help'),
+                                                        'help' => __('member::inputs.title.help'),
                                                         'value' => old(
                                                             'title[' . $_LOCALE_BASE_CODE . ']'
                                                         ),
@@ -78,14 +94,14 @@
                                                         'description[' . $_LOCALE_BASE_CODE . ']',
                                                     'view' => 'INLINE',
                                                     'label' =>
-                                                        __('maknon::inputs.description.label') .
+                                                        __('member::inputs.description.label') .
                                                         ' <span class="text-danger"> [' .
                                                         $_LOCALE_BASE_CODE .
                                                         '] <span>',
                                                     'placeholder' => __(
-                                                        'maknon::inputs.description.placeholder'
+                                                        'member::inputs.description.placeholder'
                                                     ),
-                                                    'help' => __('maknon::inputs.description.help'),
+                                                    'help' => __('member::inputs.description.help'),
                                                     'value' => old(
                                                         'description[' . $_LOCALE_BASE_CODE . ']'
                                                     ),
@@ -100,7 +116,7 @@
                             </div>
                         </div>
 
-                        @if ($CurrentUser->can('STATUS_UPDATE_MARKA') or $CurrentUser->isAn('ROOT'))
+                        @if ($CurrentUser->can('STATUS_UPDATE_CATEGORY') or $CurrentUser->isAn('ROOT'))
                             @include(
                                 'member::common-components.inputs.select',
                                 [
@@ -141,7 +157,7 @@
 
                         <div class="col-lg-2 col-xl-2 m-auto d-flex mt-5">
                             
-                            <a href="{{ route('markas.index') }}" class="btn btn-success btn-back mr-2 ml-2 mt-5 w-50">
+                            <a href="{{ route('cms::categories.index') }}" class="btn btn-success btn-back mr-2 ml-2 mt-5 w-50">
                                 {!! __('member::strings.back') !!}
                             </a>
 

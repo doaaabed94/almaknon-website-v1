@@ -114,6 +114,19 @@ Route::prefix('offers')->group(function() {
     Route::post('{model}/toggle-status', 'OfferController@postStatus')->name('offers.postStatus');
     Route::get('{model}'               , 'OfferController@read')->name('offers.read');
 });
-
+Route::prefix('configs')->group(function() {
+    Route::get('/'                     , 'ConfigController@index')->name('configs.index');
+    Route::post('/'                    , 'ConfigController@postIndex')->name('configs.postIndex');
+    Route::get('list'                  , 'ConfigController@ajaxList')->name('configs.ajaxList');
+    Route::get('create'                , 'ConfigController@create')->name('configs.create');
+    Route::post('create'               , 'ConfigController@postCreate')->name('configs.postCreate');
+    Route::get('{model}/update'        , 'ConfigController@update')->name('configs.update');
+    Route::post('{model}/update'       , 'ConfigController@postUpdate')->name('configs.postUpdate');
+    Route::post('{model}/delete'       , 'ConfigController@postDelete')->name('configs.postDelete');
+    Route::post('{model}/restore'      , 'ConfigController@postRestore')->name('configs.postRestore');
+    Route::post('{model}/perma-delete' , 'ConfigController@postPermaDelete')->name('configs.postPermaDelete');
+    Route::post('{model}/toggle-status', 'ConfigController@postStatus')->name('configs.postStatus');
+    Route::get('{model}'               , 'ConfigController@read')->name('configs.read');
+});
 
 });

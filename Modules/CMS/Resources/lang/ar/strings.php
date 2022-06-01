@@ -17,4 +17,8 @@ return [
     'code'                    => 'code',
     'yes'                     => 'نعم',
     'no'                      => 'لا',
+    'contant_img' =>'صور تفصيلية',
+    'main_contant_img' =>'الصورة  الرئيسية' ,
+
+
 ];

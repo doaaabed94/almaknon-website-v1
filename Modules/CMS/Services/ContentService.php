@@ -4,6 +4,7 @@ namespace Modules\CMS\Services;
 
 use Illuminate\Support\Facades\DB;
 use Modules\CMS\Entities\Content;
+use Modules\Member\Entities\Attachment;
 use Str;
 
 class ContentService extends BaseService
@@ -11,9 +12,10 @@ class ContentService extends BaseService
 
     public $validationsRules = [
         'postCreate' => [
-
+            'category_id' => 'required',
         ],
         'postUpdate' => [
+            'category_id' => 'required',
             //'status'                          => 'nullable|in:ACTIVE,DISABLED',
         ],
     ];
@@ -119,6 +121,28 @@ class ContentService extends BaseService
         $this->data['model']->status = empty($this->data['store_data']['status']) ? 'ACTIVE' : $this->data['store_data']['status'];
         $this->data['model']->save();
 
+    
+     if (isset($this->data['store_data']['main_contant_img']) && is_array($this->data['store_data']['main_contant_img']) && !empty($this->data['store_data']['main_contant_img'])) {
+            $attachments = Attachment::whereIn('id', $this->data['store_data']['main_contant_img'])->get();
+            foreach ($attachments as $key => $attachment) {
+                $attachment->type            = 'LINKED';
+                $attachment->attachable_id   = $this->data['model']->id;
+                $attachment->attachable_type = get_class($this->data['model']);
+                $attachment->save();
+            }
+        }
+        
+        
+        if (isset($this->data['store_data']['contant_img']) && is_array($this->data['store_data']['contant_img']) && !empty($this->data['store_data']['contant_img'])) {
+            $attachments = Attachment::whereIn('id', $this->data['store_data']['contant_img'])->get();
+            foreach ($attachments as $key => $attachment) {
+                $attachment->type            = 'LINKED';
+                $attachment->attachable_id   = $this->data['model']->id;
+                $attachment->attachable_type = get_class($this->data['model']);
+                $attachment->save();
+            }
+        }
+
         return $this->response(200, [], null, route('cms::contents.index'));
     }
 
@@ -168,6 +192,24 @@ class ContentService extends BaseService
         $this->data['model']->category_id      = $this->data['update_data']['category_id'];
         $this->data['model']->save();
 
+           if (isset($this->data['update_data']['contant_img']) && is_array($this->data['update_data']['contant_img']) && !empty($this->data['update_data']['contant_img'])) {
+            $attachments = Attachment::whereIn('id', $this->data['update_data']['contant_img'])->get();
+            foreach ($attachments as $key => $attachment) {
+                $attachment->type            = 'LINKED';
+                $attachment->attachable_id   = $this->data['model']->id;
+                $attachment->attachable_type = get_class($this->data['model']);
+                $attachment->save();
+            }
+        }
+     if (isset($this->data['update_data']['main_contant_img']) && is_array($this->data['update_data']['main_contant_img']) && !empty($this->data['update_data']['main_contant_img'])) {
+            $attachments = Attachment::whereIn('id', $this->data['update_data']['main_contant_img'])->get();
+            foreach ($attachments as $key => $attachment) {
+                $attachment->type            = 'LINKED';
+                $attachment->attachable_id   = $this->data['model']->id;
+                $attachment->attachable_type = get_class($this->data['model']);
+                $attachment->save();
+            }
+        }
         return $this->response(200, [], null, route('cms::contents.update', ['model' => $id]));
     }
 

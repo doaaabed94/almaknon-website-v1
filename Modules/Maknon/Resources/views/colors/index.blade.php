@@ -11,7 +11,7 @@
         <a href="{{ route('colors.index') }}" > {!! __('maknon::main.colors_list') !!} </a>
         @endslot
         @slot('title_li')
-            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_color'))
+            @if (auth()->user()->isAn('ROOT') or auth()->user()->can('CREATE_COLOR'))
                 <a href="{!! route('colors.create') !!}" class="btn btn-warning">
                     {!! __('member::strings.add_new') !!}
                 </a>
@@ -47,13 +47,13 @@
                                     <td>
                                       @include('member::common-components.action_datatable', [
                                         'id'                        => $data->id,
-                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_colorS'),
-                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_colorS'),
-                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_colorS')) && $data->trashed(),
-                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_colorS')) && !$data->trashed(),
-                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_colorS'),
-                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_colorS')) && $data->isEnabled(),
-                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_colorS')) && $data->isDisabled(),
+                                        'can_read'                  => auth()->user()->isAn('ROOT') OR auth()->user()->can('READ_COLOR'),
+                                        'can_update'                => auth()->user()->isAn('ROOT') OR auth()->user()->can('UPDATE_COLOR'),
+                                        'can_postRestore'           => (auth()->user()->isAn('ROOT') OR auth()->user()->can('RESTORE_COLOR')) && $data->trashed(),
+                                        'can_postDelete'            => (auth()->user()->isAn('ROOT') OR auth()->user()->can('DELETE_COLOR')) && !$data->trashed(),
+                                        'can_postPermaDelete'       => auth()->user()->isAn('ROOT') OR auth()->user()->can('PERMA_DELETE_COLOR'),
+                                        'can_disabled'              => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_COLOR')) && $data->isEnabled(),
+                                        'can_enabled'               => (auth()->user()->isAn('ROOT') OR auth()->user()->can('STATUS_UPDATE_COLOR')) && $data->isDisabled(),
                                         
                                         'read_url'                  => route('colors.read', ['model' => $data->id]) ,
                                         'delete_url'                => route('colors.postDelete', ['model' => $data->id]) ,

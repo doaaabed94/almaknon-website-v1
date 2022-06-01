@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        @if ($CurrentUser->can('STATUS_UPDATE_color') or $CurrentUser->isAn('ROOT'))
+                        @if ($CurrentUser->can('STATUS_UPDATE_COLOR') or $CurrentUser->isAn('ROOT'))
                             @include(
                                 'member::common-components.inputs.select',
                                 [

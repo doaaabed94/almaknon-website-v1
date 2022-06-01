@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'website_name'  => 'ALMaknon',
+    'website_name'  => 'almaknon',
     'welcome_back'  => 'Welcome Back !',
     'email'         => 'E-mail',
     'password'      => 'Password',

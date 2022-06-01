@@ -66,7 +66,8 @@ class UserController extends AdminBaseController
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('NeedPermissions:READ_USERS')->only(['index', 'postIndex', 'read']);
+        // $this->middleware('NeedPermissions:READ_USERS')->only(['index', 'postIndex', 'read']);
+        $this->middleware('NeedPermissions:READ_USERS')->only(['postIndex', 'read']);
         $this->middleware('NeedPermissions:CREATE_USERS')->only(['create', 'postCreate']);
         $this->middleware('NeedPermissions:UPDATE_USERS')->only(['update', 'postUpdate']);
         $this->middleware('NeedPermissions:DELETE_USERS')->only(['postDelete']);
@@ -77,7 +78,8 @@ class UserController extends AdminBaseController
     }
 
     public function index(Request $request)
-    {
+    {   
+         if (auth()->user()->can('READ_USERS')) {
         $this->data['Countries'] = Country::with('translations')->get();
         $this->data['Roles']     = Role::with('translations')->get();
         $this->data['Users'] = User::select([
@@ -98,8 +100,11 @@ class UserController extends AdminBaseController
             $this->data['Users']->withDisabled();
 
         $this->data['Users'] = $this->data['Users']->get();
-
         return view('member::users.index', $this->data);
+
+    }else{
+        return view('member::index');
+    }
     }
 
     public function create(Request $request)
@@ -148,6 +153,7 @@ class UserController extends AdminBaseController
                 $this->data['model']->email        = $request->email;
                 $this->data['model']->username     = $request->username;
                 $this->data['model']->phone_number = $request->phone_number;
+                $this->data['model']->type = $request->roles;
                 $this->data['model']->address      = empty($request->address) ? null : $request->address;
                 $this->data['model']->password     = Hash::make( $request->password );
                 $this->data['model']->gender       = empty($request->gender) ? 'M' : $request->gender;
@@ -310,6 +316,7 @@ class UserController extends AdminBaseController
                 $this->data['model']->email        = $request->email;
                 $this->data['model']->username     = $request->username;
                 $this->data['model']->phone_number = $request->phone_number;
+                $this->data['model']->type = $request->roles;
                 $this->data['model']->address      = empty($request->address) ? null : $request->address;
                 $this->data['model']->gender       = empty($request->gender) ? 'M' : $request->gender;
                 $this->data['model']->birthday     = empty($request->birthday) ? null : Carbon::parse($request->birthday)->toDateTimeString();

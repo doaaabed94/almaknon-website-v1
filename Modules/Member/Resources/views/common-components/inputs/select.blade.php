@@ -30,9 +30,9 @@
         ], $options);
     @endphp
     @if( $_X['view'] == 'INLINE' )
-        <div class="form-group row">
+        <div class="form-group row {!! $_X['container_class'] !!}">
             <label class="{!! $_X['label_size'] !!} col-form-label">{!! $_X['label'] !!}</label>
-            <div class="{!! $_X['input_size'] !!} {!! $_X['container_class'] !!}">
+            <div class="{!! $_X['input_size'] !!}">
                 <select name="{!! $_X['name'] !!}" class="form-control kt-selectpicker {!! $_X['errors']->has($_X['name']) ? 'is-invalid' : '' !!} {!! $_X['class'] !!}" {!! (!is_null($_X['size'])) ? 'data-size="'. $_X['size'] .'"' : '' !!} {!! $_X['attr'] !!} {!! $_X['disabled'] ? 'disabled=""' : '' !!} {!! $_X['searchable'] ? 'data-live-search="true"' : '' !!}>
                     @if( !is_null($_X['nullable']) )
                         <option value="{!! $_X['nullable_v'] !!}">{!! $_X['nullable'] !!}</option>

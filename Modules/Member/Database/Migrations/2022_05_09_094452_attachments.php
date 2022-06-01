@@ -20,7 +20,7 @@ class Attachments extends Migration
             $table->string('uid')->nullable();
             $table->integer('size')->nullable();
             $table->string('mime', 100)->nullable();
-            $table->string('input_name', 20)->nullable();
+            $table->text('input_name')->nullable();
             $table->nullableMorphs('attachable');
             $table->unsignedInteger('uploaded_by')->nullable();
             $table->timestamps();

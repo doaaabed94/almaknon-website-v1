@@ -4,7 +4,7 @@ return [
     'cms_management'          => 'cms management',
     'category_management'     => 'categories & pages',
     'sub_category_management' => 'sub categories',
-    'contents_management'     => 'contents management',
+    'contents_management'     => 'contents',
 
     'categories_list'         => 'list of categories',
     'contents_list'           => 'list of contents',
@@ -16,4 +16,7 @@ return [
 
     'yes'                     => 'yes',
     'no'                      => 'no',
+
+    'contant_img' =>'image',
+    'main_contant_img' =>'main image' ,
 ];

@@ -7,7 +7,7 @@
 @section('content')
     @component('member::common-components.breadcrumb')
         @slot('title')
-        <a href="{{ route('degrees.index') }}" >  {!! __('maknon::main.cars_list') !!} </a>
+        <a href="{{ route('cars.index') }}" >  {!! __('maknon::main.cars_list') !!} </a>
         @endslot
         @slot('li_1')
             {!! __('member::strings.read') !!}

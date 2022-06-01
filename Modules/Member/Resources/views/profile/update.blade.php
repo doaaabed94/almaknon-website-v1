@@ -20,17 +20,17 @@
                         <input type="hidden" name="model" value="{{ $model->id }}">
                         <div id="show_inline_general_error"></div>
                     
-                             @include('member::common-components.inputs.image', [
+                {{--                 @include('member::common-components.inputs.image', [
                                     'options' => [
                                         'view'        => 'INLINE',
                                         'name'        => 'avatar',
                                         'label'       => __('member::inputs.avatar.label'),
                                         'placeholder' => __('member::inputs.avatar.placeholder'),
-                                        'value_src'   => '',
-                                        'default_src' => '',
+                                        'value_src'   => app('GraphManager')->src('400x400', 'user', $model->avatar),
+                                        'default_src' => app('GraphManager')->defaultSrc('400x400', 'user'),
                                         'value'       => old('avatar', $model->avatar)
                                     ]
-                                ])
+                                ]) --}}
                                 @include('member::common-components.inputs.text', [
                                     'options' => [
                                         'view'        => 'INLINE',
@@ -107,7 +107,7 @@
                                             return 'data-dial="'. $V->dial_code .'"';
                                         },
                                         'text'        => function($K, $V){
-                                            return $V->SmartTranslation('name', app()->getLocale());
+                                            return $V->translateOrFirst(app()->getLocale())->name;
                                         },
                                         'values'      => function($K, $V){
                                             return $V->id;

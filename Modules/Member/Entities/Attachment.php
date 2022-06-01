@@ -4,14 +4,13 @@ namespace Modules\Member\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Modules\Member\Entities\Traits\FileManager;
 use Storage;
 
 class Attachment extends Model
 {
-    use FileManager;
-
     protected $table = 'attachments';
+
+    protected $guarded = [];
 
     protected $appends = ['url'];
 
@@ -32,7 +31,7 @@ class Attachment extends Model
             '1920x1079',
             '1920x1280',
             '1200x848',
-            '1920x600',
+            '1920x600'
         ],
     ];
 
@@ -50,20 +49,19 @@ class Attachment extends Model
     {
         parent::boot();
 
-        static::deleting(function ($attachment) {
+        static::deleting(function($attachment){
             // delete associated file from storage
             Storage::disk('public')->delete($attachment->uid);
         });
     }
 
-    public function getUid($size = '85x85')
-    {
+    public function getUid($size = '85x85'){
         // This means that the image is not actually stored internaly but rather externally.
-        if (Str::startsWith($this->uid, 'http')) {
+        if(Str::startsWith($this->uid, 'http')){
             return $this->uid;
         }
 
-        if (!self::imageDimensions()->contains($size) && $size != 'original') {
+        if(! self::imageDimensions()->contains($size) && $size != 'original'){
             return route('image', ['size' => $size, 'path' => 'not_found.png']);
         }
 
@@ -71,12 +69,11 @@ class Attachment extends Model
         ? route('image', ['size' => $size, 'path' => $this->uid])
         : route('image', [
             'size' => $size,
-            'path' => 'defaults/attachments.png',
+            'path' => 'defaults/attachments.png'
         ]);
     }
 
-    public static function imageDimensions()
-    {
+    public static function imageDimensions(){
         return collect(self::$imageOptions['dimensions']);
     }
 
@@ -86,4 +83,5 @@ class Attachment extends Model
         ? route('image', ['size' => $size, 'path' => $this->uid])
         : route('image', ['size' => $size, 'path' => 'defaults/attachements.png']);
     }
+
 }
